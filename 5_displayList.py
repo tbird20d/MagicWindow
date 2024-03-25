@@ -337,7 +337,7 @@ def main():
 
     #screen = cv2.imread('assets/blackScreen.jpg', -1)
     #screen = cv2.resize(screen, (1500, 860))
-    screen = np.zeros(shape=[1500, 860, 3], dtype=np.uint8)
+    screen = np.zeros(shape=[860, 1500, 3], dtype=np.uint8)
     cv2.imshow('Cube', screen)
     render_h = screen.shape[0]
     render_w = screen.shape[1]

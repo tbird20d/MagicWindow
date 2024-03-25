@@ -85,11 +85,11 @@ def draw_cube(cube, background):
     cv2.line(screen, project(cube[3]), project(cube[0]), front_color, 3)
 
     font = cv2.FONT_HERSHEY_DUPLEX
-    img = cv2.putText(screen, "Press t,s,r for mode, and <esc> to exit", (50, 10), font, 1, white, 1, cv2.LINE_AA)
+    img = cv2.putText(screen, "Press t,s,r for mode, and <esc> to exit", (50, 30), font, 1, white, 1, cv2.LINE_AA)
     font = cv2.FONT_HERSHEY_DUPLEX
-    img = cv2.putText(screen, "Current Mode: " + mode + ".", (50, 50), font, 1, white, 1, cv2.LINE_AA)
+    img = cv2.putText(screen, "Current Mode: " + mode + ".", (50, 60), font, 1, white, 1, cv2.LINE_AA)
     font = cv2.FONT_HERSHEY_DUPLEX
-    img = cv2.putText(screen, str(mouse_x) + ", " + str(mouse_y), (50, 100), font, 1, white, 1, cv2.LINE_AA)
+    img = cv2.putText(screen, str(mouse_x) + ", " + str(mouse_y), (50, 90), font, 1, white, 1, cv2.LINE_AA)
 
     cv2.imshow('Cube', screen)
 
@@ -143,7 +143,7 @@ def main():
 
     #screen = cv2.imread('assets/blackScreen.jpg', -1)
     #screen = cv2.resize(screen, (900, 600))
-    screen = np.zeros(shape=[900, 600, 3], dtype=np.uint8)
+    screen = np.zeros(shape=[600, 900, 3], dtype=np.uint8)
     cv2.imshow('Cube', screen)
     h = screen.shape[0]
     w = screen.shape[1]

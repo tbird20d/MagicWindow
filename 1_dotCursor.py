@@ -8,7 +8,7 @@ import numpy as np
 #img = cv2.imread('assets/blackScreen.jpg', -1)
 #img = cv2.resize(img, (900, 600))
 
-img = np.zeros(shape=[900, 600, 3], dtype=np.uint8)
+img = np.zeros(shape=(600, 900, 3), dtype=np.uint8)
 blank_img = img.copy()
 
 cv2.imshow('image', img)

@@ -3,6 +3,11 @@ import dlib
 import numpy as np
 
 ESC = 27
+MAGENTA = (255, 0, 255)
+BLUE = (255, 0, 0)
+RED = (0, 0, 255)
+CYAN = (255, 255, 0)
+GREEN = (0, 255, 0)
 
 # Initialize dlib's face detector and load the facial landmark predictor
 detector = dlib.get_frontal_face_detector()
@@ -48,13 +53,28 @@ while True:
         # Draw each landmark with lines spanning regions
         last_point = None
         for i, landmark in enumerate(landmark_points):
-            cv2.circle(blank_frame, landmark, 1, (255, 0, 0), -1)
             if last_point is not None:
-                cv2.line(blank_frame, last_point, landmark, (0, 255, 0), 1)
+                cv2.line(blank_frame, last_point, landmark, GREEN, 1)
+            cv2.circle(blank_frame, landmark, 2, RED, -1)
             last_point = landmark
 
+            # Special lines
+            if i == 31:
+                cv2.line(blank_frame, landmark_points[27], landmark, GREEN, 1)
+            if i == 35:
+                cv2.line(blank_frame, landmark_points[27], landmark, GREEN, 1)
+                cv2.line(blank_frame, landmark_points[30], landmark, GREEN, 1)
+            if i == 41:
+                cv2.line(blank_frame, landmark_points[36], landmark, GREEN, 1)
+            if i == 47:
+                cv2.line(blank_frame, landmark_points[42], landmark, GREEN, 1)
+            if i == 59:
+                cv2.line(blank_frame, landmark_points[48], landmark, GREEN, 1)
+            if i == 67:
+                cv2.line(blank_frame, landmark_points[60], landmark, GREEN, 1)
+
             # Region separation indicies
-            if i in [16, 21, 26, 35, 41, 47]:
+            if i in [16, 21, 26, 35, 41, 47, 59]:
                 last_point = None
         
         # Get the nose tip position
@@ -62,12 +82,12 @@ while True:
         
         # Define the left and right eye regions
         left_eye = np.array([(landmarks.part(n).x, landmarks.part(n).y) for n in range(36, 42)], np.int32)
-        for landmark in left_eye:
-            cv2.circle(blank_frame, landmark, 2, (255, 0, 255), -1)  # Magenta dot for the eye landmarks
+        # for landmark in left_eye:
+        #     cv2.circle(blank_frame, landmark, 2, (255, 0, 255), -1)  # Magenta dot for the eye landmarks
             
         right_eye = np.array([(landmarks.part(n).x, landmarks.part(n).y) for n in range(42, 48)], np.int32)
-        for landmark in right_eye:
-            cv2.circle(blank_frame, landmark, 2, (255, 0, 255), -1)  # Magenta dot for the eye landmarks
+        # for landmark in right_eye:
+        #     cv2.circle(blank_frame, landmark, 2, (255, 0, 255), -1)  # Magenta dot for the eye landmarks
 
         # Calculate the bounding box for each eye
         left_eye_bounds = cv2.boundingRect(left_eye)
@@ -102,12 +122,12 @@ while True:
         
         # Use movement_vector to determine the lateral movement
         # For simplicity, this example just prints the vector
-        print("Movement vector:", movement_vector)
+        # print("Movement vector:", movement_vector)
 
         # Visual feedback for the landmarks
-        cv2.circle(blank_frame, nose_tip_position, 2, (0, 0, 255), -1)  # Red dot for the nose tip
-        cv2.circle(blank_frame, left_eye_center, 2, (255, 255, 0), -1)  # Cyan dot for the left eye
-        cv2.circle(blank_frame, right_eye_center, 2, (255, 255, 0), -1)  # Cyan dot for the right eye
+        cv2.circle(blank_frame, nose_tip_position, 2, MAGENTA, -1)  # Magenta dot for the nose tip
+        cv2.circle(blank_frame, left_eye_center, 2, CYAN, -1)  # Cyan dot for the left eye
+        cv2.circle(blank_frame, right_eye_center, 2, CYAN, -1)  # Cyan dot for the right eye
 
     cv2.imshow("Frame", blank_frame)
 

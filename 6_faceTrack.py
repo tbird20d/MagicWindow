@@ -45,6 +45,7 @@ while True:
 
         landmark_points = np.array([(landmarks.part(n).x, landmarks.part(n).y) for n in range(0, 68)])
 
+        # Draw each landmark with lines spanning regions
         last_point = None
         for i, landmark in enumerate(landmark_points):
             cv2.circle(blank_frame, landmark, 1, (255, 0, 0), -1)
@@ -52,6 +53,7 @@ while True:
                 cv2.line(blank_frame, last_point, landmark, (0, 255, 0), 1)
             last_point = landmark
 
+            # Region separation indicies
             if i in [16, 21, 26, 35, 41, 47]:
                 last_point = None
         
